@@ -6,10 +6,16 @@ const Intern = require('./lib/Intern');
 const fs = require('fs');
 const inquirer = require('inquirer');
 const { inherits } = require('util');
+const Prompt = require('inquirer/lib/prompts/base');
 
 const employees =[];
 
-function employeePrompt() {
+function init(){
+    startHTML();
+    addEmployee();
+};
+
+function addEmployee() {
     return inquirer.prompt([
         {
             type: 'input',
@@ -51,12 +57,12 @@ function employeePrompt() {
         },
         {
             type: 'list',
-            name: 'addEmployee',
+            name: 'addTeammate',
             message: 'Would you like to add another team member?',
             choices: ['Yes', 'No']
         }    
     ])
-    .then(function({roleAttr, addEmployee}){
+    .then(function({roleAttr, addTeammate}){
         let newEmployee;
         if(role === 'Engineer'){
             newEmployee = new Engineer(name, id, email, roleAttr);
@@ -66,14 +72,111 @@ function employeePrompt() {
             newEmployee = new Manager(name, id, email, roleAttr);
         }
         employees.push(newEmployee);
-        console.log(newEmployee);
-    })
+        //console.log(newEmployee);
+        renderHTML(newEmployee)
+        .then(function(){
+            if(addTeammate === "Yes"){
+                console.log(newEmployee);
+                addEmployee();
+            } else if(addTeammate === 'No'){
+                //console.log('bye!');
+                wrapHTML();
+            }
+        });
+      });
     });
 };
 
+function renderHTML(employee){
+    return new Promise(function(resolve, reject){
+        const name = employee.getName();
+        const id = employee.getId();
+        const email = employee.getEmail();
+        const role = employee.getRole();
+        let data = '';
+        if(role === 'Engineer'){
+            const github = employee.getGithub();
+            data = `<div class="col-6">
+            <div class="card mx-auto mb-3" style="width: 18rem">
+            <h5 class="card-header">${name}<br /><br />Engineer</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email Address: ${email}</li>
+                <li class="list-group-item">GitHub: ${github}</li>
+            </ul>
+            </div>
+        </div>`
+        } else if(role === 'Intern'){
+            const schoolName = employee.getSchool();
+            data = `<div class="col-6">
+            <div class="card mx-auto mb-3" style="width: 18rem">
+            <h5 class="card-header">${name}<br /><br />Intern</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email Address: ${email}</li>
+                <li class="list-group-item">School: ${schoolName}</li>
+            </ul>
+            </div>
+        </div>`;
+        } else if(role === 'Manager'){
+            const officeNumber = employee.getOfficeNumber();
+            data = `<div class="col-6">
+            <div class="card mx-auto mb-3" style="width: 18rem">
+            <h5 class="card-header">${name}<br /><br />Manager</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${id}</li>
+                <li class="list-group-item">Email Address: ${email}</li>
+                <li class="list-group-item">Office Phone: ${officeNumber}</li>
+            </ul>
+            </div>
+        </div>`
+        }
+        console.log('Adding employee(s) your team profile ...');
+        fs.appendFile('dist/teamProfile.html', data, (err) =>{
+            if(err){
+                return reject(err);
+            }
+            return resolve();
+        });
+    });
+};
 
-function init(){
-    employeePrompt();
+function wrapHTML(){
+    const html = ` </div>
+    </div>
+    
+    </body>
+    </html>`;
+    fs.appendFile("dist/teamProfile.html", html, function (err) {
+        if (err) {
+            console.log(err);
+        };
+    });
+    console.log("done rendering profile page");
+};
+
+function startHTML() {
+    const html = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Team Profile</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark mb-5">
+            <span class="navbar-brand mb-0 h1 w-100 text-center">Team Profile</span>
+        </nav>
+        <div class="container">
+            <div class="row">`;
+    fs.writeFile("dist/teamProfile.html", html, function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+    console.log("start");
 };
 
 init();
