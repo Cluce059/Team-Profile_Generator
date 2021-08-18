@@ -80,7 +80,7 @@ function addEmployee() {
                 addEmployee();
             } else if(addTeammate === 'No'){
                 //console.log('bye!');
-                wrapHTML();
+                endHTML();
             }
         });
       });
@@ -98,7 +98,7 @@ function renderHTML(employee){
             const github = employee.getGithub();
             data = `<div class="col-6">
             <div class="card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header">${name}<br /><br />Engineer</h5>
+            <h5 class="card-header bg-primary">${name}<br /><br />Engineer</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
                 <li class="list-group-item">Email Address: ${email}</li>
@@ -110,7 +110,7 @@ function renderHTML(employee){
             const schoolName = employee.getSchool();
             data = `<div class="col-6">
             <div class="card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header">${name}<br /><br />Intern</h5>
+            <h5 class="card-header bg-primary">${name}<br /><br />Intern</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
                 <li class="list-group-item">Email Address: ${email}</li>
@@ -122,7 +122,7 @@ function renderHTML(employee){
             const officeNumber = employee.getOfficeNumber();
             data = `<div class="col-6">
             <div class="card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header">${name}<br /><br />Manager</h5>
+            <h5 class="card-header bg-primary">${name}<br /><br />Manager</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
                 <li class="list-group-item">Email Address: ${email}</li>
@@ -141,7 +141,7 @@ function renderHTML(employee){
     });
 };
 
-function wrapHTML(){
+function endHTML(){
     const html = ` </div>
     </div>
     
@@ -166,8 +166,8 @@ function startHTML() {
         <title>Team Profile</title>
     </head>
     <body>
-        <nav class="navbar navbar-dark bg-dark mb-5">
-            <span class="navbar-brand mb-0 h1 w-100 text-center">Team Profile</span>
+        <nav class="navbar navbar-dark bg-danger mb-5">
+            <span class="navbar-brand mb-0 h1 w-100 text-center">My Team</span>
         </nav>
         <div class="container">
             <div class="row">`;
