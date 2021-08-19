@@ -13,7 +13,6 @@
   - [Tests](#tests)
   - [Questions](#questions)
 
-  ![websiteScreenshot](src\Screenshot 2021-08-18 204644.jpg)
   ## Installation
   💾 clone this repo, install node.js and npm packages inquirer FileSystem 
   ## Usage
@@ -32,5 +31,9 @@
   <br />
   :octocat: Find me on GitHub: [Cluce059](https://github.com/Cluce059)<br />
   <br />
+
+ ## Screenshot
+  ![websiteScreenshot](./src/screenshot.jpg)
+
   💬 Email: Cluce059@gmail.com<br /><br />
   _This README was generated with ❤️ by [README-generator](https://github.com/Cluce059/readme-generator) 	👀👀👀_
