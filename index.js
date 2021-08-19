@@ -98,13 +98,18 @@ function renderHTML(employee){
             const github = employee.getGithub();
             data = `<div class="col-6">
             <div class="shadow card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header bg-primary text-white">${name}<br /><br />Engineer</h5>
+            <h5 class="card-header bg-primary text-white">${name}<br /><br />         
+            <i style="font-size:24px;color:white" class="fa">&#xf0f4;</i> 
+            Engineer</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
                 <li class="list-group-item">Email: 
                 <a href = "mailto: ${email}">${email}</a>
                 </li>
-                <li class="list-group-item">GitHub: ${github}</li>
+                <li class="list-group-item">
+                GitHub: 
+                <a href="https://github.com/${github}">${github}</a>
+                </li>
             </ul>
             </div>
         </div>`
@@ -112,7 +117,9 @@ function renderHTML(employee){
             const schoolName = employee.getSchool();
             data = `<div class="col-6">
             <div class="shadow card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header bg-primary text-white">${name}<br /><br />Intern</h5>
+            <h5 class="card-header bg-primary text-white">${name}<br /><br />
+            <i style="font-size:24px;color:white" class="fa">&#xf118;</i>
+            Intern</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
                 <li class="list-group-item">Email: 
@@ -126,7 +133,9 @@ function renderHTML(employee){
             const officeNumber = employee.getOfficeNumber();
             data = `<div class= "col-6">
             <div class="shadow card mx-auto mb-3" style="width: 18rem">
-            <h5 class="card-header bg-primary text-white">${name}<br /><br />Manager</h5>
+            <h5 class="card-header bg-primary text-white">${name}<br /><br />
+            <i style="font-size:24px;color:white" class="fa">&#xf2b9;</i>
+            Manager</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">ID: ${id}</li>
                 <li class="list-group-item">Email:
@@ -169,6 +178,7 @@ function startHTML() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Team Profile</title>
     </head>
     <body>
