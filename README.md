@@ -12,6 +12,8 @@
   - [Contributing](#contributing)
   - [Tests](#tests)
   - [Questions](#questions)
+
+  ![websiteScreenshot](src\Screenshot 2021-08-18 204644.jpg)
   ## Installation
   💾 clone this repo, install node.js and npm packages inquirer FileSystem 
   ## Usage
